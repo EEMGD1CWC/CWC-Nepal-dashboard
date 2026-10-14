@@ -26,8 +26,9 @@ def go_home():
 @st.cache_data(ttl=600)
 def load_data():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds_path = r"C:\Nepal_Data_Web_Scrapping\credentials.json"
-    creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
+    # Read credentials from Streamlit's secure vault
+    creds_dict = dict(st.secrets["gcp_service_account"])
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
     client = gspread.authorize(creds)
     sheet = client.open_by_key("1ghciZbDGR5Jxp8EzPKhX2VwjYH93L7yO-4abZzLzJ9w").sheet1
     return sheet.get_all_values()
