@@ -89,12 +89,7 @@ df = pd.DataFrame(data_rows, columns=["Date"] + station_names)
 df["Date"] = pd.to_datetime(df["Date"], format="%d-%m-%Y %H:%M:%S", errors='coerce')
 df = df.dropna(subset=["Date"]).sort_values("Date")
 
-# Sidebar Navigation
-logo_path = r"C:\Nepal_Data_Web_Scrapping\cwc_logo.jpg"
-if os.path.exists(logo_path):
-    st.sidebar.image(logo_path, use_container_width=True)
-else:
-    st.sidebar.warning("Logo not found. Place 'cwc_logo.jpg' in C:\\Nepal_Data_Web_Scrapping\\")
+st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/e/ec/Cwclogo.jpg", use_container_width=True)
 
 st.sidebar.button("🏠 Home Page", on_click=go_home, use_container_width=True)
 st.sidebar.header("Site Selection")
